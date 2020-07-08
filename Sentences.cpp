@@ -12,27 +12,27 @@ int main()
 	setlocale(LC_ALL, "Russian");
 	vector <Set> sentences;
 	vector <vector<string>> sent_numb;
-	readSent("Text.txt", sentences); //формируем набор множеств
-	readSent("Text.txt", sent_numb); //формируем набор предложений
+	readSent("Text.txt", sentences); //С„РѕСЂРјРёСЂСѓРµРј РЅР°Р±РѕСЂ РјРЅРѕР¶РµСЃС‚РІ
+	readSent("Text.txt", sent_numb); //С„РѕСЂРјРёСЂСѓРµРј РЅР°Р±РѕСЂ РїСЂРµРґР»РѕР¶РµРЅРёР№
 	ofstream out("Results.txt");
 	int i = 0;
 	for (vector<Set>::iterator it = sentences.begin(); it != sentences.end(); it++) {
 		int j = i;
-		for (vector<Set>::iterator it2 = it; it2 != sentences.end(); it2++) { //сравниваем каждое множество с остальными, идущими после него
-			if ((*it) == (*it2) && it != it2) {									//если множества равны, выводим множества и предложения
-				out << "Одинаковые множества " <<endl<<"Множество 1: "<< *it << endl << "Множество 2: " << *it2 << endl<<"Предложение 1: ";
+		for (vector<Set>::iterator it2 = it; it2 != sentences.end(); it2++) { //СЃСЂР°РІРЅРёРІР°РµРј РєР°Р¶РґРѕРµ РјРЅРѕР¶РµСЃС‚РІРѕ СЃ РѕСЃС‚Р°Р»СЊРЅС‹РјРё, РёРґСѓС‰РёРјРё РїРѕСЃР»Рµ РЅРµРіРѕ
+			if ((*it) == (*it2) && it != it2) {									//РµСЃР»Рё РјРЅРѕР¶РµСЃС‚РІР° СЂР°РІРЅС‹, РІС‹РІРѕРґРёРј РјРЅРѕР¶РµСЃС‚РІР° Рё РїСЂРµРґР»РѕР¶РµРЅРёСЏ
+				out << "РћРґРёРЅР°РєРѕРІС‹Рµ РјРЅРѕР¶РµСЃС‚РІР° " <<endl<<"РњРЅРѕР¶РµСЃС‚РІРѕ 1: "<< *it << endl << "РњРЅРѕР¶РµСЃС‚РІРѕ 2: " << *it2 << endl<<"РџСЂРµРґР»РѕР¶РµРЅРёРµ 1: ";
 				for (vector<string>::iterator it3 = sent_numb.at(i).begin(); it3 != sent_numb.at(i).end(); it3++)
 					out << *it3;
-				out << endl<< "Предложение 2: ";
+				out << endl<< "РџСЂРµРґР»РѕР¶РµРЅРёРµ 2: ";
 				for (vector<string>::iterator it3 = sent_numb.at(j).begin(); it3 != sent_numb.at(j).end(); it3++)
 					out << *it3;
 				out << endl << endl;
 			}
-			if ((*it) - (*it2) == (*it)) {		//если множества не содержат одинаковых символов, выводим множества и предложения
-				out << "Разные множества " << endl << "Множество 1: "<< *it << endl << "Множество 2: "<< *it2 << endl<< "Предложение 1: ";
+			if ((*it) - (*it2) == (*it)) {		//РµСЃР»Рё РјРЅРѕР¶РµСЃС‚РІР° РЅРµ СЃРѕРґРµСЂР¶Р°С‚ РѕРґРёРЅР°РєРѕРІС‹С… СЃРёРјРІРѕР»РѕРІ, РІС‹РІРѕРґРёРј РјРЅРѕР¶РµСЃС‚РІР° Рё РїСЂРµРґР»РѕР¶РµРЅРёСЏ
+				out << "Р Р°Р·РЅС‹Рµ РјРЅРѕР¶РµСЃС‚РІР° " << endl << "РњРЅРѕР¶РµСЃС‚РІРѕ 1: "<< *it << endl << "РњРЅРѕР¶РµСЃС‚РІРѕ 2: "<< *it2 << endl<< "РџСЂРµРґР»РѕР¶РµРЅРёРµ 1: ";
 				for (vector<string>::iterator it3 = sent_numb.at(i).begin(); it3 != sent_numb.at(i).end(); it3++)
 					out << *it3;
-				out << endl << "Предложение 2: ";
+				out << endl << "РџСЂРµРґР»РѕР¶РµРЅРёРµ 2: ";
 				for (vector<string>::iterator it3 = sent_numb.at(j).begin(); it3 != sent_numb.at(j).end(); it3++)
 					out << *it3;
 				out << endl << endl;
@@ -58,14 +58,14 @@ bool readSent(const char* filename, vector <Set>& sentences) {
 		unsigned char cc;
 		while (c!='.' && c != '!' && c != '?'){
 			in >> cc;
-			if (int(cc) >= 192 && int(cc) <= 255) { //если считанный символ - символ русского алфавита
+			if (int(cc) >= 192 && int(cc) <= 255) { //РµСЃР»Рё СЃС‡РёС‚Р°РЅРЅС‹Р№ СЃРёРјРІРѕР» - СЃРёРјРІРѕР» СЂСѓСЃСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°
 				if (int(cc) < 224)
-					cc += unsigned char(32); // приводим все заглавные символы к строчным 
-				sent.insert(cc);			//заполняем множество символов
+					cc += unsigned char(32); // РїСЂРёРІРѕРґРёРј РІСЃРµ Р·Р°РіР»Р°РІРЅС‹Рµ СЃРёРјРІРѕР»С‹ Рє СЃС‚СЂРѕС‡РЅС‹Рј 
+				sent.insert(cc);			//Р·Р°РїРѕР»РЅСЏРµРј РјРЅРѕР¶РµСЃС‚РІРѕ СЃРёРјРІРѕР»РѕРІ
 			}
 			c = cc;
 		}
-		if (!sent.empty())					//заполняем множество из множеств символов
+		if (!sent.empty())					//Р·Р°РїРѕР»РЅСЏРµРј РјРЅРѕР¶РµСЃС‚РІРѕ РёР· РјРЅРѕР¶РµСЃС‚РІ СЃРёРјРІРѕР»РѕРІ
 			sentences.push_back(sent);
 	}
 	in.close();
@@ -83,11 +83,11 @@ bool readSent(const char* filename, vector<vector<string>>& sent_numb) {
 	while (!in.eof()) {
 		vector <string> sent;
 		do {
-			in >> s;				//считываем строку
-			sent.push_back(s);		//вставляем строку в множество строк
-			sent.push_back(" ");   //добавляем пробел между словами
-		} while (s.find('.') > 100 && s.find('?') > 100 && s.find('!') > 100);		//пока не встретим . ! или ?
-		sent_numb.push_back(sent);		//записываем предложение в вектор предложений
+			in >> s;				//СЃС‡РёС‚С‹РІР°РµРј СЃС‚СЂРѕРєСѓ
+			sent.push_back(s);		//РІСЃС‚Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ РјРЅРѕР¶РµСЃС‚РІРѕ СЃС‚СЂРѕРє
+			sent.push_back(" ");   //РґРѕР±Р°РІР»СЏРµРј РїСЂРѕР±РµР» РјРµР¶РґСѓ СЃР»РѕРІР°РјРё
+		} while (s.find('.') > 100 && s.find('?') > 100 && s.find('!') > 100);		//РїРѕРєР° РЅРµ РІСЃС‚СЂРµС‚РёРј . ! РёР»Рё ?
+		sent_numb.push_back(sent);		//Р·Р°РїРёСЃС‹РІР°РµРј РїСЂРµРґР»РѕР¶РµРЅРёРµ РІ РІРµРєС‚РѕСЂ РїСЂРµРґР»РѕР¶РµРЅРёР№
 	}
 	in.close();
 	return true;
